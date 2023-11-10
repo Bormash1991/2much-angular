@@ -1,7 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+export enum MainRoutingEnum {
+  Auth = 'auth'
+}
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: MainRoutingEnum.Auth,
+    pathMatch: 'full'
+  },
+  {
+    path: MainRoutingEnum.Auth,
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
